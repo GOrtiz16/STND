@@ -1,36 +1,36 @@
 
 variable "resource_group_name" {
-  type        = string
-  default     = "az-eastus-bsp-dev-newobw-all-rg"
+  type    = string
+  default = "az-eastus-bsp-dev-newobw-all-rg"
 }
 
 variable "aks_name" {
-  type = string
+  type    = string
   default = "az-eastus-bsp-dev-newobw-aks"
-  
+
 }
 
 variable "aks_sku_tier" {
-  type = string
+  type    = string
   default = "Standard"
 }
 
 
 variable "aks_zones" {
-  type = list(number)
-  default = [ 1 ]
+  type    = list(number)
+  default = [1]
 }
 
 variable "aks_identity" {
-  type = string
+  type    = string
   default = "SystemAssigned"
-  
+
 }
 
-variable "location" { 
-  type = string
+variable "location" {
+  type    = string
   default = "eastus"
-  
+
 }
 
 variable "node_count" {

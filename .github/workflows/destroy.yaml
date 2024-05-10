@@ -1,8 +1,8 @@
-name: TerraformDeploy
+name: TerraformDestroy
 on: workflow_dispatch
 
 jobs:
-  deploy:
+  destroy:
     runs-on: ubuntu-latest
     environment: dev
     env:
@@ -24,15 +24,7 @@ jobs:
       - name: terraform validate
         run: terraform validate
         working-directory: ./aks
-
-      - name: terraform plan
-        run: terraform plan -out=tfplan.out
-        working-directory: ./aks
       
-      - name: terraform apply
-        run: terraform apply -auto-approve tfplan.out
+      - name: terraform destroy
+        run: terraform destroy -auto-approve
         working-directory: ./aks
-      
-      # - name: terraform destroy
-      #   run: terraform destroy -auto-approve
-      #   working-directory: ./terraform
