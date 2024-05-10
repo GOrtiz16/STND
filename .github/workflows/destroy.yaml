@@ -24,12 +24,12 @@ jobs:
       - name: terraform init
         # run: terraform init -backend-config="sas_token=${{ secrets.SAS_TOKEN }}"
         run: terraform init
-        working-directory: ./aks
+        working-directory: ./terraform
 
       - name: terraform validate
         run: terraform validate
-        working-directory: ./aks
+        working-directory: ./terraform
       
       - name: terraform destroy
         run: terraform destroy -auto-approve
-        working-directory: ./aks
+        working-directory: ./terraform
