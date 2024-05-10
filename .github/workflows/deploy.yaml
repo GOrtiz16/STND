@@ -1,0 +1,38 @@
+name: Terraform
+on: workflow_dispatch
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: terraform init
+        # run: terraform init -backend-config="sas_token=${{ secrets.SAS_TOKEN }}"
+        run: terraform init
+        working-directory: ./aks
+
+      - name: terraform validate
+        run: terraform validate
+        working-directory: ./aks
+
+      - name: terraform plan
+        run: terraform plan -out=tfplan.out
+        working-directory: ./aks
+      
+      - name: terraform apply
+        run: terraform apply -auto-approve tfplan.out
+        working-directory: ./aks
+      
+      # - name: terraform destroy
+      #   run: terraform destroy -auto-approve
+      #   working-directory: ./terraform
