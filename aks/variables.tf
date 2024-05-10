@@ -10,6 +10,11 @@ variable "resource_group_name_aks_secondary" {
   default = "az-eastus-bsp-dev-newobw-all-rg-secondary"
 }
 
+variable "ssh_name" {
+  type    = string
+  default = "az-eastus-bsp-dev-newobw-ssh"
+
+}
 variable "aks_name" {
   type    = string
   default = "az-eastus-bsp-dev-newobw-aks"

@@ -7,9 +7,9 @@ resource "random_pet" "azurerm_kubernetes_cluster_dns_prefix" {
 resource "azurerm_kubernetes_cluster" "k8s" {
   location            = var.location
   name                = var.aks_name
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.rg_aks.name
   dns_prefix          = random_pet.azurerm_kubernetes_cluster_dns_prefix.id
-  node_resource_group = "mc-${azurerm_resource_group.rg.name}"
+  node_resource_group = "mc-${azurerm_resource_group.rg_aks_secondary.name}"
   sku_tier            = var.aks_sku_tier
   identity {
     type = var.aks_identity
