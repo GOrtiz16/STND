@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     enable_node_public_ip = local.default_node_pool.enable_node_public_ip
     os_sku                = local.default_node_pool.os_sku
     os_disk_size_gb       = local.default_node_pool.os_disk_size_gb
-    vnet_subnet_id = azurerm_subnet.sbnt01.id
+    # vnet_subnet_id = azurerm_subnet.sbnt01.id
     
 
 
