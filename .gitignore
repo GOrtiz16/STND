@@ -1,0 +1,7 @@
+terraform/aks_kubeconfig
+terraform/.terraform/
+terraform/terraform.tfstate.backup
+terraform/terraform.tfstate
+terraform/.terraform.lock.hcl
+aks_kubeconfig
+.vscode
