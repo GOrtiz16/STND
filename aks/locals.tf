@@ -14,6 +14,17 @@ locals {
     load_balancer_sku = "standard"
     network_policy    = "azure"
   }
+
+  virtual_network = {
+    name          = "az-eAstus-bsp-newobw-vnet-backend"
+    address_space = "10.0.0.0/8"
+  }
+
+  subnets = {
+      name           = "az-eastus-bsp-dev-newobw-snet-aks"
+      address_prefix = "10.240.0.0/16"
+    }
+
 }
 
 
@@ -23,10 +34,6 @@ locals {
 #     dns_name = "dns-fitting-urchin"
 #   }
 
-#   virtual_network = {
-#     name          = "AZ-EASTUS-BSP-NEWOBW-VNET-BACKEND"
-#     address_space = "10.0.0.0/16"
-#   }
 
 #   subnets = {
 #       name           = "AZ-EASTUS-BSP-DEV-NEWOBW-SNET-AKS"
@@ -34,4 +41,4 @@ locals {
 #     }
 
 
-# }s
+# }
