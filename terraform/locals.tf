@@ -21,17 +21,17 @@ locals {
   }
 
   subnets = {
-      name           = "az-eastus-bsp-dev-newobw-snet-aks"
-      address_prefix = "10.240.0.0/16"
-    }
-  
+    name           = "az-eastus-bsp-dev-newobw-snet-aks"
+    address_prefix = "10.240.0.0/16"
+  }
+
   database = {
-    collation      = "SQL_Latin1_General_CP1_CI_AS"
-    license_type   = "LicenseIncluded"
-    max_size_gb    = 500
-    read_scale     = false
-    sku_name       = "GP_Gen5_4"
-    zone_redundant = false
+    collation            = "SQL_Latin1_General_CP1_CI_AS"
+    license_type         = "LicenseIncluded"
+    max_size_gb          = 500
+    read_scale           = false
+    sku_name             = "GP_Gen5_4"
+    zone_redundant       = false
     storage_account_type = "Local"
   }
 
