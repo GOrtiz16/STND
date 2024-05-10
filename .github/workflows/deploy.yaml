@@ -21,6 +21,11 @@ jobs:
         run: terraform init
         working-directory: ./aks
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.6.3"
+
       - name: terraform validate
         run: terraform validate
         working-directory: ./aks
