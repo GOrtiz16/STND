@@ -7,7 +7,7 @@
 
  resource "azurerm_subnet" "sbnt01" {
    name                 = local.subnets.name
-   resource_group_name  = azurerm_resource_group.rg_aks
+   resource_group_name  = azurerm_resource_group.rg_aks.name
    virtual_network_name = azurerm_virtual_network.vnet01.name
    address_prefixes     = [local.subnets.address_prefix]
 }
