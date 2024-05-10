@@ -1,6 +1,6 @@
  resource "azurerm_virtual_network" "vnet01" {
    name                = local.virtual_network.name
-   resource_group_name = azurerm_resource_group.rg02
+   resource_group_name = azurerm_resource_group.rg02.name
    location            = var.location
    address_space       = [local.virtual_network.address_space]
  }
