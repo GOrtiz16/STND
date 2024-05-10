@@ -1,7 +1,13 @@
 
-variable "resource_group_name" {
+variable "resource_group_name_aks" {
   type    = string
   default = "az-eastus-bsp-dev-newobw-all-rg"
+}
+
+
+variable "resource_group_name_aks_secondary" {
+  type    = string
+  default = "az-eastus-bsp-dev-newobw-all-rg-secondary"
 }
 
 variable "aks_name" {
