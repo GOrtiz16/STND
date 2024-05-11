@@ -36,7 +36,7 @@ resource "azurerm_private_endpoint" "az_acr_endpoint" {
   private_service_connection {
     name                           = "private-serviceconnection"
     private_connection_resource_id = azurerm_container_registry.acr.id
-    subresource_names              = ["acrRegistry"]
+    subresource_names              = ["registry"]
     is_manual_connection           = false
   }
 
