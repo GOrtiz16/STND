@@ -44,4 +44,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     # service_cidr = "10.2.0.0/16"
     # dns_service_ip    = "10.2.0.10"
   }
+
+
 }
