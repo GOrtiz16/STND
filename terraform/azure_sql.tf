@@ -45,10 +45,10 @@ resource "azurerm_private_endpoint" "az_sql_endpoint" {
     is_manual_connection           = false
   }
 
-    ip_configuration {
-      name                          = "ip-config"
-      private_ip_address            = "10.240.0.33"
-  }
+  #   ip_configuration {
+  #     name                          = "ip-config"
+  #     private_ip_address            = "10.240.0.33"
+  # }
 
   private_dns_zone_group {
     name                 = "dns-zone-group"
