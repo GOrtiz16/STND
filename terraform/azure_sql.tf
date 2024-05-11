@@ -23,3 +23,37 @@ resource "azurerm_mssql_database" "sqlDatabase" {
   sample_name          = "AdventureWorksLT"
 
 }
+
+
+resource "azurerm_private_dns_zone" "az_sql_dns_zone" {
+  name                = "privatelink.database.windows.net"
+  resource_group_name = azurerm_resource_group.rg_all.name
+}
+
+
+
+resource "azurerm_private_endpoint" "az_sql_endpoint" {
+  name                = "private-endpoint-sql"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg_all.name
+  subnet_id           = azurerm_subnet.sbnt01.id
+
+  private_service_connection {
+    name                           = "private-serviceconnection"
+    private_connection_resource_id = azurerm_mssql_server.sqlServer.id
+    subresource_names              = ["sqlServer"]
+    is_manual_connection           = false
+  }
+
+  private_dns_zone_group {
+    name                 = "dns-zone-group"
+    private_dns_zone_ids = [azurerm_private_dns_zone.az_sql_dns_zone.id]
+  }
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "az_sql_vnet_link" {
+  name                  = "vnet-link"
+  resource_group_name   = azurerm_resource_group.rg_all.name
+  private_dns_zone_name = azurerm_private_dns_zone.az_sql_dns_zone.name
+  virtual_network_id    = azurerm_virtual_network.vnet01.id
+}

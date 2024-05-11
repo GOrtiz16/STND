@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-node
+  template:
+    metadata:
+      labels:
+        app: azure-node
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: azure-node
+        image: azeastusbspdevnewobwacr.azurecr.io/adventure:latest
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 3000
+          name: azure-node
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-node
+spec:
+  type: LoadBalancer  
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    app: azure-node
+---
