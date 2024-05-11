@@ -1,12 +1,16 @@
 resource "azurerm_container_registry" "acr" {
   # name                = var.acr_name
-  name                = replace(var.acr_name, "/[^a-zA-Z0-9]/", "")
-  resource_group_name = azurerm_resource_group.rg_all.name
-  location            = var.location
-  sku                 = var.acr_sku
-  admin_enabled       = false
+  name                          = replace(var.acr_name, "/[^a-zA-Z0-9]/", "")
+  resource_group_name           = azurerm_resource_group.rg_all.name
+  location                      = var.location
+  sku                           = var.acr_sku
+  admin_enabled                 = false
   public_network_access_enabled = false
-  network_rule_bypass_option = none
+
+  network_rule_set  {
+    default_action = "Deny"
+  }
+
 
 }
 
