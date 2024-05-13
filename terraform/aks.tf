@@ -59,17 +59,3 @@ resource "azurerm_user_assigned_identity" "identity" {
   resource_group_name = azurerm_resource_group.rg_seguridad.name
 }
 
-
-resource "azurerm_kubernetes_cluster_addon_profile" "example" {
-  cluster_name        = azurerm_kubernetes_cluster.k8s.name
-  resource_group_name = azurerm_resource_group.azurerm_resource_group.name
-  addon_profile {
-    azure_keyvault_secrets_provider {
-      enabled = true
-      identity {
-        type                      = "UserAssigned"
-        user_assigned_identity_id = azurerm_user_assigned_identity.identity.id
-      }
-    }
-  }
-}
