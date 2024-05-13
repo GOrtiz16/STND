@@ -1,7 +1,8 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "akv01" {
-  name                          = var.keyvault_name
+  #   name                          = var.keyvault_name
+  name                          = replace(var.keyvault_name, "/[^a-zA-Z0-9]/", "")
   location                      = var.location
   resource_group_name           = azurerm_resource_group.rg_seguridad.name
   enabled_for_disk_encryption   = local.keyvault.enabled_for_disk_encryption
