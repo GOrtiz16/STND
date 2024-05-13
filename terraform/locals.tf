@@ -64,18 +64,18 @@ locals {
   }
 
   keyvault = {
-    enabled_for_disk_encryption = false
-    soft_delete_retention_days = 90
-    public_network_access_enabled = false
-    purge_protection_enabled = false
-    sku_name = "standard"
-    dns_zone_name = "privatelink.vaultcore.azure.net"
-    custom_network_interface_name = "pvep-akv-nic"
+    enabled_for_disk_encryption     = false
+    soft_delete_retention_days      = 90
+    public_network_access_enabled   = false
+    purge_protection_enabled        = false
+    sku_name                        = "standard"
+    dns_zone_name                   = "privatelink.vaultcore.azure.net"
+    custom_network_interface_name   = "pvep-akv-nic"
     private_service_connection_name = "private-serviceconnection"
-    is_manual_connection = false
-    subresource_names = "vault"
-    private_dns_zone_group           = "akv-dns-zone-group"
-    virtual_network_link             = "akv-link"
+    is_manual_connection            = false
+    subresource_names               = "vault"
+    private_dns_zone_group          = "akv-dns-zone-group"
+    virtual_network_link            = "akv-link"
 
   }
 

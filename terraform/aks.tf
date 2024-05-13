@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   key_vault_secrets_provider {
-    secret_rotation_enabled  = local.aks.secret_rotation_enabled
+    secret_rotation_enabled = local.aks.secret_rotation_enabled
   }
 
   default_node_pool {
