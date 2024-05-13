@@ -18,12 +18,12 @@ resource "azurerm_key_vault" "akv01" {
       application_id          = ""
       certificate_permissions = []
       tenant_id               = data.azurerm_client_config.current.tenant_id
-      object_id               = azurerm_kubernetes_cluster.k8s.key_vault_secrets_provider[0].secret_identity[0].object_id
+      object_id               = azurerm_user_assigned_identity.identity.principal_id
       key_permissions = [
         "Get",
       ]
       secret_permissions = [
-        "Get",
+        "Get", "List"
       ]
       storage_permissions = [
         "Get",
@@ -32,6 +32,8 @@ resource "azurerm_key_vault" "akv01" {
   ]
 
 }
+
+
 
 #----------------------------------------------------------
 

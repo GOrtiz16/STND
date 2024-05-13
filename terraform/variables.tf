@@ -38,7 +38,7 @@ variable "aks_zones" {
 
 variable "aks_identity" {
   type    = string
-  default = "SystemAssigned"
+  default = "UserAssigned"
 
 }
 
