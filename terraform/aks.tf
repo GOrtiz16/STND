@@ -15,6 +15,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     type = var.aks_identity
   }
 
+  key_vault_secrets_provider {
+    secret_rotation_enabled  = local.aks.secret_rotation_enabled
+  }
+
   default_node_pool {
     name                  = local.default_node_pool.name
     vm_size               = local.default_node_pool.vm_size

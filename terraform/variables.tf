@@ -12,6 +12,12 @@ variable "resource_group_name_all" {
   default = "az-eastus-bsp-dev-newobw-all-rg"
 }
 
+variable "resource_group_name_seguridad" {
+  type    = string
+  default = "az-eastus-bsp-dev-newobw-all-seguridad"
+}
+
+
 #<-------------------- AKS ---------------------->
 variable "aks_name" {
   type    = string
@@ -90,10 +96,19 @@ variable "sql_private_endpoint_name" {
 
 }
 
+#<-------------------- KEY VAULT ---------------------->
+
+variable "keyvault_name" {
+  type    = string
+  default = "az-eastus-bsp-dev-newobw-kv"
+}
 
 
+variable "akv_private_endpoint_name" {
+  type    = string
+  default = "private-endpoint-akv"
 
-
+}
 
 
 
