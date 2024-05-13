@@ -2,10 +2,10 @@ resource "azurerm_mssql_server" "sqlServer" {
   name                         = var.sqlServer_name
   resource_group_name          = azurerm_resource_group.rg_all.name
   location                     = var.location
-  version                      = "12.0"
-  administrator_login          = "admin123"
-  administrator_login_password = "6EW5SSHR9BVt"
-  minimum_tls_version          = "1.2"
+  version                      = local.database.version
+  administrator_login          = local.database.administrator_login
+  administrator_login_password = local.database.administrator_login_password
+  minimum_tls_version          = local.database.minimum_tls_version
 
 
 }
@@ -20,29 +20,29 @@ resource "azurerm_mssql_database" "sqlDatabase" {
   sku_name             = local.database.sku_name
   zone_redundant       = local.database.zone_redundant
   storage_account_type = local.database.storage_account_type
-  sample_name          = "AdventureWorksLT"
+  sample_name          = local.database.sample_name
 
 }
 
 
 resource "azurerm_private_dns_zone" "az_sql_dns_zone" {
-  name                = "privatelink.database.windows.net"
+  name                = local.database.dns_zone_name
   resource_group_name = azurerm_resource_group.rg_all.name
 }
 
 
 
 resource "azurerm_private_endpoint" "az_sql_endpoint" {
-  name                = "private-endpoint-sql"
+  name                = var.sql_private_endpoint_name
   location            = var.location
   resource_group_name = azurerm_resource_group.rg_all.name
   subnet_id           = azurerm_subnet.sbnt01.id
 
   private_service_connection {
-    name                           = "private-serviceconnection"
+    name                           = local.database.private_service_connection_name
     private_connection_resource_id = azurerm_mssql_server.sqlServer.id
-    subresource_names              = ["sqlServer"]
-    is_manual_connection           = false
+    subresource_names              = [local.database.subresource_names]
+    is_manual_connection           = local.database.is_manual_connection
   }
 
   #   ip_configuration {
@@ -51,13 +51,13 @@ resource "azurerm_private_endpoint" "az_sql_endpoint" {
   # }
 
   private_dns_zone_group {
-    name                 = "dns-zone-group"
+    name                 = local.database.private_dns_zone_group
     private_dns_zone_ids = [azurerm_private_dns_zone.az_sql_dns_zone.id]
   }
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "az_sql_vnet_link" {
-  name                  = "vnet-link"
+  name                  = local.database.virtual_network_link
   resource_group_name   = azurerm_resource_group.rg_all.name
   private_dns_zone_name = azurerm_private_dns_zone.az_sql_dns_zone.name
   virtual_network_id    = azurerm_virtual_network.vnet01.id
