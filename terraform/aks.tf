@@ -13,6 +13,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   sku_tier            = var.aks_sku_tier
   identity {
     type = var.aks_identity
+    identity_ids = azurerm_user_assigned_identity.identity.id
   }
 
   key_vault_secrets_provider {
